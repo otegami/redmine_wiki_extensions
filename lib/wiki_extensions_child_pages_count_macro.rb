@@ -27,8 +27,7 @@ module WikiExtensionsChildPagesCountMacro
       return unless obj.is_a?(WikiContent)
 
       child_pages = obj.page.descendants
-      "#{child_pages.count}".html_safe
+      child_pages.count
     end
   end
 end
-
