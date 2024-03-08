@@ -8,7 +8,7 @@ module WikiExtensionsChildPagesCountMacro
       # TODO
       # - Add test
       # - Think whether we display this count with words or not
-      return unless obj.is_a?(WikiContent)
+      return t(:error_child_pages_count_macro) unless obj.is_a?(WikiContent)
 
       child_pages = obj.page.descendants
       child_pages.size

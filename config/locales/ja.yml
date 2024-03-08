@@ -23,3 +23,5 @@ ja:
   
   wiki_extensions_new_wiki_page: 新規ページ
   field_tag_disabled: タグを利用しない
+
+  error_child_pages_count_macro: '{{child_pages_count}}マクロは、Wikiページ以外から呼び出すせません。'
