@@ -24,4 +24,4 @@ en:
   wiki_extensions_new_wiki_page: 'New page'
   field_tag_disabled: 'Disable tagging function'
 
-  error_child_pages_count_macro: 'This {{child_pages_count}} macro can be called from wiki pages only'
+  error_child_pages_count_macro: 'This {{child_pages_count}} macro can be called from Wiki pages only'
