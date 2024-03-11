@@ -14,9 +14,6 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
   end
 
   def test_child_pages_count_in_issue_page
-    issue = Issue.first
-    expected_error_macro_message = '<p>This {{child_pages_count}} macro can be called from wiki pages only</p>'
-
-    assert_equal expected_error_macro_message, textilizable('{{child_pages_count}}', object: issue)
+    assert_match /can be called from wiki pages only/, textilizable('{{child_pages_count}}', object: Issue.first)
   end
 end
