@@ -8,7 +8,7 @@ module WikiExtensionsChildPagesCountMacro
       raise t(:error_child_pages_count_macro) unless obj.is_a?(WikiContent)
 
       child_pages = obj.page.descendants
-      child_pages.size
+      child_pages.size.to_s
     end
   end
 end
