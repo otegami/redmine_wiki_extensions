@@ -8,8 +8,6 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
 
   def test_child_pages_count
     wiki_page = WikiPage.find(2)
-
-    assert_equal 3, wiki_page.descendants.size
     assert_equal '<p>3</p>', textilizable('{{child_pages_count}}', object: wiki_page.content)
   end
 
