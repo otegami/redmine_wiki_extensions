@@ -22,12 +22,25 @@ require 'redmine'
 
 module WikiExtensionsChildPagesCountMacro
   Redmine::WikiFormatting::Macros.register do
-    desc "Displays the number of child pages.\n\n" +
-         "{{child_pages_count}}\n"
+    desc "Displays the number of child pages. With no argument, it displays the number of child pages from current wiki page. Examples:\n\n" +
+         "{{child_pages_count}} -- can be used from a wiki page only\n" +
+         "{{child_pages_count(depth=2)}} -- display the number of 2 levels nesting pages only\n" +
+         "{{child_pages_count(Foo)}} -- display the number of all children pages form Foo"
     macro :child_pages_count do |obj, args|
-      raise t(:error_child_pages_count_macro) if [WikiContent, WikiContentVersion].none? { |wiki| obj.is_a?(wiki) }
+      args, options = extract_macro_options(args, :parent, :depth)
+      options[:depth] = options[:depth].to_i if options[:depth].present?
 
-      child_pages = obj.page.descendants
+      page = nil
+      if args.size > 0
+        page = Wiki.find_page(args.first.to_s, :project => @project)
+      elsif obj.is_a?(WikiContent) || obj.is_a?(WikiContentVersion)
+        page = obj.page
+      else
+        raise t(:error_child_pages_count_macro)
+      end
+      raise t(:error_page_not_found) if page.nil? || !User.current.allowed_to?(:view_wiki_pages, page.wiki.project)
+
+      child_pages = page.descendants(options[:depth])
       child_pages.size.to_s
     end
   end

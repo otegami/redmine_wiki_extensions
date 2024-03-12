@@ -4,19 +4,27 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
   include ApplicationHelper
   include ERB::Util
 
-  fixtures :projects, :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions, :issues
+  fixtures :projects, :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions, :issues,
+           :roles, :enabled_modules, :users
+
+  def teardown
+    @project = nil
+  end
 
   def test_child_pages_count_in_wiki_content
+    @project = Project.find(1)
     wiki_page = WikiPage.find(2)
     assert_equal '<p>3</p>', textilizable('{{child_pages_count}}', object: wiki_page.content)
   end
 
   def test_child_pages_count_in_wiki_content_version
+    @project = Project.find(1)
     wiki_page = WikiPage.find(2)
     assert_equal '<p>3</p>', textilizable('{{child_pages_count}}', object: wiki_page.content.versions.first)
   end
 
   def test_child_pages_count_in_issue_page
+    @project = Project.find(1)
     macro_error_message = <<-MESSAGE.gsub("\n", "")
 <p>
 <div class="flash error">
