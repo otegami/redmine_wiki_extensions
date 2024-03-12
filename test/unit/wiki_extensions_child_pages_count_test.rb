@@ -47,4 +47,17 @@ Error executing the <strong>child_pages_count</strong> macro
     MESSAGE
     assert_equal macro_error_message, textilizable('{{child_pages_count}}', object: Issue.first)
   end
+
+  def test_child_pages_count_in_wiki_without_permissions
+    @project = Project.find(1)
+    another_project_wiki = WikiPage.find(3)
+    macro_error_message = <<~MESSAGE.gsub("\n", "")
+<p>
+<div class="flash error">
+Error executing the <strong>child_pages_count</strong> macro (Page not found)
+</div>
+</p>
+    MESSAGE
+    assert_equal macro_error_message, textilizable('{{child_pages_count}}', object: another_project_wiki.content)
+  end
 end
