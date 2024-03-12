@@ -7,7 +7,8 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
   fixtures :projects, :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions, :issues,
            :roles, :enabled_modules, :users
 
-  def teardown
+  def setup
+    super
     @project = nil
   end
 
