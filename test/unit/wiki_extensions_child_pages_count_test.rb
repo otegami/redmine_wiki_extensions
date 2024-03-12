@@ -19,7 +19,7 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
   def test_child_pages_count_in_issue_page
     macro_error_message = <<-MESSAGE.gsub("\n", "")
 <p>
-<div class=\"flash error\">
+<div class="flash error">
 Error executing the <strong>child_pages_count</strong> macro
  (This {{child_pages_count}} macro can be called from Wiki pages only)
 </div>
