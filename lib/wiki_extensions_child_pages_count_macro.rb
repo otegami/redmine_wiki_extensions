@@ -22,6 +22,8 @@ require 'redmine'
 
 module WikiExtensionsChildPagesCountMacro
   Redmine::WikiFormatting::Macros.register do
+    # Adapted from the core logic of `child_pages` macro from Redmine's implementation.
+    # ref: https://github.com/redmine/redmine/blob/c3fe22476231adff5f6fef2e1692be8024dd0c44/lib/redmine/wiki_formatting/macros.rb#L193-L214
     desc "Displays the number of child pages. With no argument, it displays the number of child pages from current wiki page. Examples:\n\n" +
          "{{child_pages_count}} -- can be used from a wiki page only\n" +
          "{{child_pages_count(depth=2)}} -- display the number of 2 levels nesting pages only\n" +
