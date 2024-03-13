@@ -30,6 +30,38 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
     assert_equal '<p>2</p>', textilizable('{{child_pages_count(depth=1)}}', object: wiki_page.content)
   end
 
+  def test_author_option_with_current_user
+    wiki_page = WikiPage.find(2)
+    wiki_child_page_content = wiki_page.descendants.first.content
+    wiki_child_page_content.author = User.find(2)
+    wiki_child_page_content.save!
+    
+    User.current = User.find(1)
+    assert_equal '<p>2</p>', textilizable('{{child_pages_count(author=current)}}', object: wiki_page.content)
+  end
+
+  def test_author_option_with_another_user
+    another_user = User.find(2)
+    wiki_page = WikiPage.find(2)
+    wiki_child_page_content = wiki_page.descendants.first.content
+    wiki_child_page_content.author = another_user
+    wiki_child_page_content.save!
+
+    assert_equal '<p>1</p>', textilizable("{{child_pages_count(author=#{another_user.login})}}", object: wiki_page.content)
+  end
+
+  def test_author_option_with_non_existed_user
+    wiki_page = WikiPage.find(2)
+    macro_error_message = <<~MESSAGE.gsub("\n", "")
+<p>
+<div class="flash error">
+Error executing the <strong>child_pages_count</strong> macro (User not found)
+</div>
+</p>
+    MESSAGE
+    assert_equal macro_error_message, textilizable("{{child_pages_count(author=non_existed_user)}}", object: wiki_page.content)
+  end
+
   def test_in_issue_page
     macro_error_message = <<-MESSAGE.gsub("\n", "")
 <p>
