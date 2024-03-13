@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
-  include ApplicationHelper
   include ERB::Util
 
   fixtures :projects, :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions, :issues,
