@@ -42,8 +42,8 @@ Error executing the <strong>child_pages_count</strong> macro
     assert_equal macro_error_message, textilizable('{{child_pages_count}}', object: Issue.first)
   end
 
-  def test_without_permissions
-    another_project_wiki = WikiPage.find(3)
+  def test_in_another_porject_wiki_without_permissions
+    another_project_wiki = Project.find(2).wiki.pages.first
     macro_error_message = <<~MESSAGE.gsub("\n", "")
 <p>
 <div class="flash error">
