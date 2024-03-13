@@ -27,7 +27,7 @@ module WikiExtensionsChildPagesCountMacro
     desc "Displays the number of child pages. With no argument, it displays the number of child pages from current wiki page. Examples:\n\n" +
          "{{child_pages_count}} -- can be used from a wiki page only\n" +
          "{{child_pages_count(depth=2)}} -- display the number of 2 levels nesting pages only\n" +
-         "{{child_pages_count(Foo)}} -- display the number of all children pages form Foo"
+         "{{child_pages_count(Foo)}} -- display the number of all children pages from Foo"
     macro :child_pages_count do |obj, args|
       args, options = extract_macro_options(args, :parent, :depth)
       options[:depth] = options[:depth].to_i if options[:depth].present?
