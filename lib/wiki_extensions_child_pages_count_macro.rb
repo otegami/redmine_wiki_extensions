@@ -29,7 +29,7 @@ module WikiExtensionsChildPagesCountMacro
          "{{child_pages_count(depth=2)}} -- display the number of 2 levels nesting pages only\n" +
          "{{child_pages_count(Foo)}} -- display the number of all children pages from Foo"
     macro :child_pages_count do |obj, args|
-      args, options = extract_macro_options(args, :parent, :depth)
+      args, options = extract_macro_options(args, :depth)
       options[:depth] = options[:depth].to_i if options[:depth].present?
 
       page = nil
