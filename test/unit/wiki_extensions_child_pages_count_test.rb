@@ -23,8 +23,7 @@ class WikiExtensionsChildPagesCountTest < Redmine::HelperTest
   end
 
   def test_with_child_page
-    wiki_page = WikiPage.find(2)
-    assert_equal '<p>1</p>', textilizable('{{child_pages_count(Child_1)}}', object: wiki_page.content)
+    assert_equal '<p>1</p>', textilizable('{{child_pages_count(Child_1)}}')
   end
 
   def test_with_depth_option
